@@ -20,12 +20,12 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 const movieRoutes = require('./routes/movieRoutes');
-const userRoutes = require('./routes/userRoutes');
+// const userRoutes = require('./routes/userRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 
 // Use the routes
 app.use('/api/movies', movieRoutes);
-app.use('/api/users', userRoutes);
+// app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
 
 // Start the server

@@ -1,5 +1,6 @@
 const Movie = require('../models/Movie'); // Adjust the path as necessary
 const { getMovieRecommendations } = require('../services/recommendationService'); // Import the recommendation service
+const retrieveData = require('../models/funcs/getmovies');
 
 // Existing functions remain unchanged
 
@@ -13,7 +14,18 @@ exports.getMovies = async (req, res) => {
   }
 };
 
-// Function to add a new movie
+// // Function to get movie details
+exports.addMovie = async (req, res) => {
+  try {
+    const movie = new Movie(req.body);
+    await movie.save();
+    res.status(201).json(movie);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+// // Function to search movie by title
 exports.addMovie = async (req, res) => {
   try {
     const movie = new Movie(req.body);
