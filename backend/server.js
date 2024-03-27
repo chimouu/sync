@@ -27,6 +27,11 @@ const reviewRoutes = require('./routes/reviewRoutes');
 app.use('/api/movies', movieRoutes);
 // app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
+// Directly in your main server file, temporarily for testing
+app.get('/api/test', (req, res) => {
+  res.send('Test route is working');
+});
+
 
 // Start the server
 const port = process.env.PORT || 3000;

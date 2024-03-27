@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const movieController = require('../controllers/movieController');
+const { getAllMovies, getMovieByTitle } = require('../controllers/movieController');
+
 
 // Route to get all movies
-router.get('/', movieController.getMovies);
+router.get('/', getAllMovies);
+router.get('/:title', getMovieByTitle);
 
-// Route to add a new movie
-router.post('/', movieController.addMovie);
-
-// Route to get recommendation service
-router.get('/recommendations', movieController.fetchRecommendations);
+// // Route to get recommendation service
+// router.get('/recommendations', movieController.fetchRecommendations);
 
 module.exports = router;

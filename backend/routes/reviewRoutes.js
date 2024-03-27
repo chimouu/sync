@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const reviewController = require('../controllers/reviewController');
+const { getAllReviews, addReview, getReviewsForMovie } = require('../controllers/reviewController');
+
 
 // Route to add a new review
-router.post('/', reviewController.addReview);
-
+router.get('/', getAllReviews);
+router.post('/addReview', addReview);
 // Route to get reviews for a specific movie
-router.get('/movie/:movieId', reviewController.getReviewsForMovie);
+router.get('/movie/:movieId', getReviewsForMovie);
 
 module.exports = router;
