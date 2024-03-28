@@ -1,16 +1,20 @@
-const Quiz = require('../models/Quiz');
-const { generateQuizForMovie } = require('../services/quizService'); // Assuming this is your existing function
+const quizService = require('../services/quizService');
+const { generateQuizForMovie } = require('../services/quizService');
 
-exports.createQuizForMovie = async (req, res) => {
+// Controller to handle the route for generating a quiz for a movie
+const generateQuizForMovieController = async (req, res) => {
   try {
-    const { movieId } = req.params;
-    const quizData = await generateQuizForMovie(movieId);
-    const quiz = new Quiz({ movie: movieId, ...quizData });
-    await quiz.save();
-    res.status(201).json(quiz);
+    const title = req.params.title; // Extract the movie title from the request URL
+    const quizContent = await quizService.generateQuizForMovie(title); // Generate the quiz using the provided title
+    res.json({ success: true, quiz: quizContent }); // Send the generated quiz content back to the client
   } catch (error) {
-    res.status(500).send(error.message);
+    // Handle errors appropriately
+    console.error('Error generating movie quiz:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
 
-// This assumes `generateQuizForMovie` fetches or generates the quiz questions and answers based on the movie ID.
+module.exports = {
+  generateQuizForMovieController,
+};
+

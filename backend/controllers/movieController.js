@@ -127,10 +127,10 @@ exports.getMovieByTitle = async (req, res) => {
       // Adjust the projection as necessary
       const projection = { projection: { _id: 0, overview: 1 } };
 
-      const movie = await collection.findOne(query, projection);
+      const movie = await collection.findOne(query);
 
       if (movie) {
-          console.log("Movie found:", movie.overview);
+          console.log("Movie found:", movie);
           res.json(movie);
       } else {
           console.log("No movie found with that title.");

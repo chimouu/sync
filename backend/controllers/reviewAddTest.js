@@ -2,9 +2,6 @@ const axios = require('axios');
 const { ObjectId } = require('mongodb');
 const objectId = new ObjectId('65fa19b0feb60396e0f4afad');
 
-
-
-
 const formData = {
     movie: objectId,
     author: 'admin',

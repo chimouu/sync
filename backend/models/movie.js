@@ -22,7 +22,8 @@ const movieSchema = new mongoose.Schema({
   voteCount: Number
 }, { timestamps: true }); // Optional: adds createdAt and updatedAt timestamps
 
-const Movie = mongoose.model('Movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema, 'all_movies');
+
 
 module.exports = Movie;
 
