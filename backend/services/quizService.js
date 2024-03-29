@@ -72,7 +72,7 @@ const api_key = process.env.THE_MOVIE_DB_API_KEY;
 const openai_api_key = process.env.OPENAI_API_KEY;
 const mongodbUri = process.env.MONGODB_URI;
 const dbName = 'movies';
-const collectionName = 'all_movies';
+const collectionName = 'TMBD_movie';
 const collectionName1 = 'all_quizzes';
 
 // Helper function to connect to MongoDB
