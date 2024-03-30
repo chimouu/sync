@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
 
-const quizSchema = new mongoose.Schema({
-  movie: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Movie',
-    required: true
-  },
-  questions: [{
-    questionText: String,
-    options: [String], // Array of options
-    correctAnswer: String
-  }]
-  // You can add more fields as necessary
+const questionSchema = new mongoose.Schema({
+  question: String,
+  choices: [String],
+  correct_answer: String
 });
 
-const Quiz = mongoose.model('Quiz', quizSchema);
+const quizSchema = new mongoose.Schema({
+  title: String,
+  questions: [questionSchema]
+});
 
-module.exports = Quiz;
+const QuizCollection = mongoose.model('QuizCollection', quizSchema);
+
+module.exports = QuizCollection;

@@ -1,6 +1,6 @@
 // In movieController.test.js
-const { getAllMovies } = require('./movieController');
-const Movie = require('../models/movie'); // Assuming this is your model
+const { getAllMovies } = require('../movieController');
+const Movie = require('../../models/movie'); // Assuming this is your model
 
 // Mock the Movie model's find method
 jest.mock('../models/movie', () => ({

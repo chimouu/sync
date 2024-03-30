@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const quizController = require('../controllers/quizController');
+const quizController = require('../controllers/quizController'); // Adjust the path as necessary
 
-// Correct route definition using 'title' as the parameter
-router.get('/movie/:title/quiz', quizController.generateQuizForMovieController);
+router.get('/quizzes', quizController.fetchQuizzes);
 
 module.exports = router;

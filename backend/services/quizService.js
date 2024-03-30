@@ -64,76 +64,72 @@
 
 // quizService.js
 
-const axios = require('axios');
-const { MongoClient } = require('mongodb');
+// const axios = require('axios');
+// const { MongoClient } = require('mongodb');
 
-// Assuming environment variables are set for API keys and MongoDB URI
-const api_key = process.env.THE_MOVIE_DB_API_KEY;
-const openai_api_key = process.env.OPENAI_API_KEY;
-const mongodbUri = process.env.MONGODB_URI;
-const dbName = 'movies';
-const collectionName = 'TMBD_movie';
-const collectionName1 = 'all_quizzes';
+// // Assuming environment variables are set for API keys and MongoDB URI
+// const api_key = process.env.THE_MOVIE_DB_API_KEY;
+// const openai_api_key = process.env.OPENAI_API_KEY;
+// const mongodbUri = process.env.MONGODB_URI;
+// const dbName = 'movies';
+// const collectionName = 'all_quizzes';
+// const express = require('express');
+// const router = express.Router();
 
-// Helper function to connect to MongoDB
-async function connectToMongoDB() {
-  const client = new MongoClient(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-  await client.connect();
-  return client;
-}
+// // Helper function to connect to MongoDB
+// async function connectToMongoDB() {
+//   const client = new MongoClient(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+//   await client.connect();
+//   return client;
+// }
+// // Fetch quizzes by title or all quizzes if no title is provided
+// router.get('/quizzes', async (req, res) => {
+//   try {
+//     const { title } = req.query;
+//     const query = title ? { "quizzes.title": title } : {}; // Adjust based on actual data structure
+//     const quizData = await collectionName.find(query);
+//     res.json(quizData);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('An error occurred while fetching quizzes.');
+//   }
+// });
 
-// Function to retrieve a movie by title from MongoDB
-async function getMovieByTitle(title) {
-  const client = await connectToMongoDB();
-  try {
-    const db = client.db(dbName);
-    const collection = db.collection(collectionName);
-    const query = { title: { $regex: new RegExp(title, 'i') } };
-    const movie = await collection.findOne(query);
-    if (!movie) {
-      throw new Error("No movie found with that title");
-    }
-    return movie;
-  } finally {
-    await client.close();
-  }
-}
+// module.exports = router;
 
-// Function to generate a quiz using OpenAI API
-async function generateQuiz(movie) {
-  const prompt = ` ${movie} . Generate 5 multiple-choice questions with 4 answer choices each, where one of the choices is correct and the others are plausible but incorrect.Provide correct answers at the bottom`;
-  const headers = { Authorization: `Bearer ${openai_api_key}` };
-  const data = { prompt, temperature: 0.5, max_tokens: 1024, top_p: 1, frequency_penalty: 0, presence_penalty: 0 };
-  
-  const response = await axios.post('https://api.openai.com/v1/completions', data, { headers });
-  if (response.status !== 200) {
-    throw new Error("Failed to generate quiz from OpenAI");
-  }
-  return response.data.choices[0].text;
-}
+// const axios = require('axios');
+// const { MongoClient } = require('mongodb');
+// const express = require('express');
+// const router = express.Router();
 
-// Function to save the generated quiz to MongoDB
-async function saveQuizToDatabase(movieTitle, quizContent) {
-  const client = await connectToMongoDB();
-  try {
-    const db = client.db(dbName);
-    const quizzes = db.collection(collectionName1);
-    const doc = { movieTitle, quizContent, createdAt: new Date() };
-    const result = await quizzes.insertOne(doc);
-    console.log(`A document was inserted with the _id: ${result.insertedId}`);
-  } finally {
-    await client.close();
-  }
-}
+// // Assuming environment variables are set for API keys and MongoDB URI
+// const mongodbUri = process.env.MONGODB_URI;
+// const dbName = 'movies';
+// const collectionName = 'all_quizzes';
 
-// Main function to generate quiz for a given movie title
-async function generateQuizForMovie(title) {
-  const movie = await getMovieByTitle(title);
-  const quizContent = await generateQuiz(movie);
-  await saveQuizToDatabase(title, quizContent);
-  return quizContent;
-}
+// // Helper function to connect to MongoDB and get the collection
+// async function getCollection() {
+//   const client = new MongoClient(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+//   await client.connect();
+//   return client.db(dbName).collection(collectionName);
+// }
 
-module.exports = {
-  generateQuizForMovie,
-};
+// // Fetch quizzes by title or all quizzes if no title is provided
+// router.get('/quizzes', async (req, res) => {
+//   try {
+//     const { title } = req.query;
+//     const collection = await getCollection();
+//     const query = title ? { "quizzes.title": title } : {}; // Adjust based on actual data structure
+//     const quizData = await collection.find(query).toArray(); // Convert the cursor to an array
+//     res.json(quizData);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('An error occurred while fetching quizzes.');
+//   }
+// });
+
+// module.exports = router;
+
+// quizController.js
+
+

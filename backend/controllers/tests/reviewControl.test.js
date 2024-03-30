@@ -1,5 +1,5 @@
 const request = require('supertest');
-const Review = require('../models/review'); // Import your Express application
+const Review = require('../../models/review'); // Import your Express application
 
 describe('POST /api/reviews', () => {
     it('should create a new review and return 201 status', async () => {
