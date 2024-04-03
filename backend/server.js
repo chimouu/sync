@@ -23,7 +23,7 @@ const movieRoutes = require('./routes/movieRoutes');
 // const userRoutes = require('./routes/userRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const quizRoutes = require('./routes/quizRoutes');
-const recRoutes = require('./routes/recsRoutes');
+// const recRoutes = require('./routes/recsRoutes');
 
 // Use the routes
 app.use('/api/movies', movieRoutes);
@@ -31,7 +31,7 @@ app.use('/api/movies', movieRoutes);
 app.use('/api/reviews', reviewRoutes);
 // Directly in your main server file, temporarily for testing
 app.use('/api/quiz', quizRoutes);
-app.use('/api/recs', recsRoutes);
+// app.use('/api/recs', recsRoutes);
 
 app.get('/api/test', (req, res) => {
   res.send('Test route is working');
